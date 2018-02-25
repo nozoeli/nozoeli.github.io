@@ -1,0 +1,117 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\1}{\mathbbm{1}}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newcommand{\E}{\operatorname{\mathbb{E}}}
+\renewcommand{\P}{\operatorname{\mathbb{P}}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Cor}{\operatorname{Cor}}
+\newcommand{\expect}[1]{\mathbb{E}\left(#1\right)}
+\newcommand{\pr}[1]{\mathbb{P}\left(#1\right)}
+\newcommand{\var}[1]{\operatorname{Var}\left(#1\right)}
+\newcommand{\cov}[1]{\operatorname{Cov}\left(#1\right)}
+%\newcommand{\cor}[1]{\operatorname{Cor}\left(#1\right)}
+\newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+\def\iid{\stackrel{\rm iid}{\sim}}
+\def\Bin{\text{Bin}}
+\def\Unif{\text{Unif}}
+\def\lsto{\stackrel{\rm sto}{\leq}}
+\def\gsto{\stackrel{\rm sto}{\geq}}
+
+\begin{document}
+% --------------------------------------------------------------
+% Start here
+% --------------------------------------------------------------
+\title{Homework 2}%replace X with the appropriate number
+\author{MATH 281B} %if necessary, replace with your course title
+\maketitle
+\begin{exercise}{$X_n = O_p (1)$, $Y_n = o_p (X_n)$, prove $Y_n = o_p(1)$}
+\end{exercise}
+
+Consider
+$$
+\frac{Y_n}{1 } = \frac{Y_n}{X_n} \times \frac{X_n}{1}
+$$
+The first part goes to zero in probability. So consider how to show that some stable distributed variables shrink when taking product with some random variable really small.
+
+\begin{exercise}{Noncentral $\chi^2$ has mean $n+\lambda$, variance $2n+4\lambda$}
+\end{exercise}
+
+Consider decomposition
+$$
+X_i = \delta^i + Z_i
+$$
+where $Z_i$ are iid standard normal. Then 
+$$
+\sum_i X_i^2 = \sum_i (Z_i + \delta_i)^2 = \sum_i Z_i^2 + 2\sum_i Z_i \delta_i + \sum_i \delta_i^2
+$$
+and everything becomes trivial.
+
+\begin{exercise}{$n(\bar{X}^2 -\sigma^2/n  ) \rightarrow \sigma^2( \chi^2_1 -1)$ }
+\end{exercise}
+
+All you need to show is that $n(\bar{X}^2  ) \rightarrow \sigma^2( \chi^2_1 ) $, and this is a result in the delta method when first derivative is zero.
+
+\begin{exercise}{Compare the MLE and UMVUE of $\lambda e^-\lambda$ in Poisson model}
+\end{exercise}
+
+For the UMVUE, just use the delta method.
+
+For the MLE, first prove that the difference between the UMVUE and MLE goes to zero in probability. This can be achieved by taking Taylor expansion. Then show that these two random variables actually behave similarly.
+
+\begin{exercise}{}
+Construct a sequence of r.v. weakly converging to standard normal, while the variance converges to $2$.
+\end{exercise}
+
+Use a mixture of normals, with one of them as standard normal, and another serves as an variance inflater. Increase the weight of standard normal with $n$, while keep the contribution of the variance inflater stable.
+
+\begin{exercise}{}
+$n^r \E (T_{in} - g(\theta))^2 \rightarrow \nu_i^2$, show that $ARE = (\nu_1^2 / \nu_2^2)^{1/r}$
+\end{exercise}
+
+To get the ARE we standardize the constant before the expression to $n$, then everything makes sense.
+
+\begin{exercise}{Cauchy order statistics}
+\end{exercise}
+
+Since the density has the form
+$$
+F_k(x) = C F(x)^{k-1} (1 - F(x))^{n-k} f(x)
+$$
+and $F(x)$ behaves as $1/x$ as $x \rightarrow \infty$, we need $n - k\geq 2$ and $k-1 \geq 2$ to make sure the second moment of the order statistics exist.
+
+\begin{exercise}{ARE for $T_2$ and $T_2 \vee 0$ }
+\end{exercise}
+
+First prove that these two estimators will equal with high probability when $\theta \neq 0$. The next thing is to calculate the following
+$$
+n^2 \E (T_2 \vee 0)^2 
+$$
+
+It will help a lot if you take one $\sigma^2$ out of there. Wolfgram alpha may help with calculations.
+% --------------------------------------------------------------
+% You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+\end{document} 

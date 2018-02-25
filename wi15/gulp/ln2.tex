@@ -1,0 +1,105 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\1}{\mathbbm{1}}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newcommand{\E}{\operatorname{\mathbb{E}}}
+\renewcommand{\P}{\operatorname{\mathbb{P}}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Cor}{\operatorname{Cor}}
+\newcommand{\expect}[1]{\mathbb{E}\left(#1\right)}
+\newcommand{\pr}[1]{\mathbb{P}\left(#1\right)}
+\newcommand{\var}[1]{\operatorname{Var}\left(#1\right)}
+\newcommand{\cov}[1]{\operatorname{Cov}\left(#1\right)}
+%\newcommand{\cor}[1]{\operatorname{Cor}\left(#1\right)}
+\newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+\def\iid{\stackrel{\rm iid}{\sim}}
+\def\Bin{\text{Bin}}
+\def\Unif{\text{Unif}}
+\def\lsto{\stackrel{\rm sto}{\leq}}
+\def\gsto{\stackrel{\rm sto}{\geq}}
+
+\begin{document}
+% --------------------------------------------------------------
+% Start here
+% --------------------------------------------------------------
+\title{2. How We Do Modeling and Decisions}%replace X with the appropriate number
+\author{GULP Winter 2015} %if necessary, replace with your course title
+\maketitle
+
+\section{A Statistical Model}
+
+We we say we are dealing with a statistical model, we mimic the randomness in the real world by some model whose structure is clearly defined, and we use the data to nail down the parameters - which we think define the model. How do we generate this process into the formal mathematical language? We have to do some rough but more formal definitions. They may differ from advanced textbooks a little bit.
+
+\textbf{Population} - The target of your model. This is the pool of all the possible samples. If you happened to know the population, you could see from above and do all the estimations accurately. Unfortunately this is never true. The examples include: people's height; living time after the treatment; the possible waiting time of one server; etc. We often denote the population by using random variables, say $X$.
+
+\textbf{Distribution} - This is the main assumption equipped by the population. We \textbf{assume} that the population is born with some specific distribution on it. The waiting time is exponential; the height of human is normal; the number of cars passing one crossroad is Poisson, and so on. This is never going to be true, but we always do the assumptions as accurate as possible. We say $X \sim F$, meaning that $X$ is following some distribution $F$.
+
+\textbf{Parameters} - This is the reason why we are using the distributions to mimic the real world. The distribution is \textbf{defined} when the parameters are settled down. If you have $\lambda$ for Poisson$(\lambda)$, you can tell every single possible probability under the distribution. If you have the mean and the variance of a normal distribution, everything will be well defined. The target of learning the distribution is therefore simplified to leaning the parameters. We denote this as $X \sim F_\theta$. Unfortunately, the parameter is also \textbf{unknown}.
+
+\textbf{Sample} - This is the so called data, which is a realization of the population in your hand. They can be identically independently distributed (i.i.d.), which is the most common and most fancy case. Or they can be awfully samples, which needs some special treatment. Usually they are labeled as $X_i, i = 1,2,\ldots,n$. Notice that the sample is random variables.
+
+\section{Estimators}
+
+When we have the data in hand, we would like to use the data to estimate the parameters. However we are not always interested in all the original parameters. We may only be interested in some function of the parameters, denoted as $g(\theta)$. The weapon in our hands to nail it down, is called statistics.
+
+\textbf{Statistic} - This is a (measurable) function of the data, and the \textbf{data only}, which means that it can not have any argument of the unknown parameters. Examples include sample mean, sample variance, indicator $\1 (X_i \leq c)$ for some known $c$, empirical distribution, and so on. We denote the statistic as $\delta(\bf{X})$, where $\bf{X} $$= \{X_i, i = 1,2,\ldots,n \}$.
+
+When we are using $\delta(\bf{X})$ to estimate $g( \theta )$, we say that $\delta(\bf{X})$ is an \textbf{estimator} of $g(\theta )$. The next thing is that, how to measure the behavior of an estimator? We have the following tools to do this.
+
+\textbf{Loss function} - This is defined as $L(g(\theta),\delta(\bf{X}))$. This function can take a lot of forms, but some common loose rules will apply:
+$$
+L \geq 0
+$$
+$$
+L (g(\theta), g(\theta)) = 0 ,\forall \theta
+$$
+and $L$ is monotone non-decreasing with the increase of the distance between $g(\theta)$ and $\delta(\bf{X})$. These regulations are natural. 
+
+Since the loss function involves the data, this is also a random variable. To accurately describe the 'loss', we need the following tool.
+
+\textbf{Risk function} - This function is defined as $R_\theta(\delta, g) = \E_\theta L(g(\theta),\delta(\bf{X})) $. Notice that risk function may differ with different $\theta$ values. The argument inside is the function form $\delta$ and the function interested $g$.
+
+\textbf{Example}(Regression). The data is defined as 
+$$
+\bf Y = \bf X \beta + e . 
+$$
+The loss function is taking the form as 
+$$
+L (\beta, \hat \beta) = (\bf Y  - \bf X \hat \beta)^2.
+$$
+Minimizing using derivatives will yield
+$$
+\bf X ' \bf Y  = \bf X ' \bf X \hat \beta,
+$$
+which is
+$$
+\hat \beta = (\bf X ' \bf X )^{-1} \bf X ' \bf Y.
+$$
+
+
+% --------------------------------------------------------------
+% You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+\end{document} 

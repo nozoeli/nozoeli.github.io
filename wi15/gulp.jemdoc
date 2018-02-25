@@ -1,0 +1,25 @@
+= Grad/Undergrad Learning Program - Slightly Spiced Statistics
+
+== Info 
+
+Welcome to the homepage of the GULP in statistics running by me at Winter 2015. I designed this program to be a bridge between standard undergraduate statistics courses and the graduate courses in mathematical statistics. We will discuss some slightly advanced topics in order to draw a big picture of classical point estimation problem. Some popular statistical methods will be discussed as well if time permits.
+
+The prerequisite for the program is some exposure of undergraduate analysis, probability and statistics. If you have take a course it is certainly a plus.
+
+If you have questions or are willing to join, please do not hesitate to email me.
+
+[gulp/ln1.pdf Lecture notes 1] on probability tools.
+
+[gulp/ln2.pdf Lecture notes 2] on statistical modeling and estimators.
+
+[gulp/ln3.pdf Lecture notes 3] on unbiasedness and variance-bias tradeoff.
+
+[gulp/ln4.pdf Lecture notes 4] on Cremer-Rao Bound and Fisher Information.
+
+[gulp/ln5.pdf Lecture notes 5] on Examples for C-R bounds.
+
+[gulp/ln6.pdf Lecture notes 6] on Sufficiency and completeness.
+
+[gulp/ln7.pdf Lecture notes 7] on Some examples and up/downs.
+
+Return to my [http://math.ucsd.edu/~yul085 home page].

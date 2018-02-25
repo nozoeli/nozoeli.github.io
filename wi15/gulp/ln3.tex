@@ -1,0 +1,111 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\1}{\mathbbm{1}}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newcommand{\E}{\operatorname{\mathbb{E}}}
+\renewcommand{\P}{\operatorname{\mathbb{P}}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Cor}{\operatorname{Cor}}
+\newcommand{\expect}[1]{\mathbb{E}\left(#1\right)}
+\newcommand{\pr}[1]{\mathbb{P}\left(#1\right)}
+\newcommand{\var}[1]{\operatorname{Var}\left(#1\right)}
+\newcommand{\cov}[1]{\operatorname{Cov}\left(#1\right)}
+%\newcommand{\cor}[1]{\operatorname{Cor}\left(#1\right)}
+\newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+\def\iid{\stackrel{\rm iid}{\sim}}
+\def\Bin{\text{Bin}}
+\def\Unif{\text{Unif}}
+\def\lsto{\stackrel{\rm sto}{\leq}}
+\def\gsto{\stackrel{\rm sto}{\geq}}
+
+\begin{document}
+% --------------------------------------------------------------
+% Start here
+% --------------------------------------------------------------
+\title{3. Why Unbiasedness?}%replace X with the appropriate number
+\author{GULP Winter 2015} %if necessary, replace with your course title
+\maketitle
+
+\section{Why we can not search in everything?}
+
+Remember we have defined a proper measure of the estimator performance which is risk function $R_\theta(\delta, g) = \E_\theta L(g(\theta),\delta(\bf{X}))$. Then naturally, we want an estimator which can perform really good under different $\theta$. Or mathematically, a \textbf{universal minimizer of risk function.} That is, there exists $\delta^*$ such that
+$$
+\forall \delta, R_\theta(\delta, g) \geq R_\theta(\delta^*, g), \forall \theta.
+$$
+
+But is that possible? Let's look at a simple case.
+
+\textbf{Example}(Silly guesser) Suppose we have a set of samples from normal distribution $N(\theta, 1)$ and we want to estimate $\theta$. One wise guy uses the sample mean to estimate $\theta$, and his competitor, a person with no statistics knowledge, claims $\theta =5 $, always.
+
+Under the square loss, with simple calculation we will know that the risk for the first person is always $1/n$. While the risk for the second person is $(\theta - 5)^2$. This is fairly interesting. If the true parameter is $0$, or $8$, the first person is clearly better. But what if, in a parallel world, the $\theta$ is just $5 $? Then the guesser beat the wise statistician in the case.
+
+This example shows a cruel but important fact. If our estimator $\delta $ yields $ R_\theta(\delta, g) > 0$ for some $\theta = \theta_0$, a guesser betting on $\theta_0$ will beat $\delta$. Therefore such $\delta$ is not a universal minimizer of risk function. Therefore, the only possible universal risk minimizer will make the risk function zero, always.
+
+This simply means we know $g(\theta)$, which is not possible.
+
+\section{Unbiasedness}
+
+So this is the reason we restrict the set of estimators. If we apply some regulations, and we find the universal risk minimizer in that subset of estimators, then we may feel good about it. Unbiased estimators are such a subset that is widely used.
+
+The definition of unbiasedness is as follows. If $\delta(\bf X)$ is unbiased, then
+$$
+\E_\theta (\delta(\mathbf{X})) = g(\theta), \forall \theta.
+$$
+Pay attention that the equation holds for all possible values of $\theta$. For example, the estimator $\sum_i X_i / (n+1)$ for the mean is unbiased when mean is zero, but biased otherwise. So this is not an unbiased estimator. Here are some examples of unbiased estimators.
+
+For normal distribution $N(\theta, \sigma^2)$, the following estimator
+$$
+(\bar{X} = \frac{\sum_{i = 1}^n X_i}{n} , S^2 = \frac{\sum_{i=1}^n (X_i - \bar{X} )^2 }{n-1})
+$$
+is unbiased for $(\lambda, \sigma^2)$. It is a direct task to check this.
+
+For Poisson distribution $\lambda$, both $\bar{X}$ and $S^2$, defined as before, are unbiased estimator for $\lambda$. (Why?)
+
+For an geometric distribution with only one observation, the unbiased estimator for the success rate $p$, is $\1 (X = 0)$.
+
+\section{Bias-Variance Trade-off}
+
+Under squared loss, we have an important result:
+$$
+R(\delta,g) = \E (\delta(X) - g(\theta))^2 = \E (\delta(X) -\E \delta(X))^2 + \E \delta(X) - g(\theta) )^2 = \E (\delta(X) - \E \delta(X))^2 + (\E \delta(X) - g(\theta) )^2
+$$
+The first part is the variance of $\delta(X)$, and the second part is the square of the bias. This generally means that if you reduce the estimator's variance, you probably introduce more bias into the model.
+
+For example, for normal model, the unbiased estimator is
+$$
+S^2 = \frac{\sum_{i=1}^n (X_i - \bar{X} )^2 }{n-1}
+$$
+and we have the MLE
+$$
+S^2 = \frac{\sum_{i=1}^n (X_i - \bar{X} )^2 }{n}
+$$
+Here MLE has smaller variance, but MLE is biased, so MLE trades the bias with smaller variance.
+
+
+
+% --------------------------------------------------------------
+% You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+\end{document} 

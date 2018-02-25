@@ -1,0 +1,98 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\1}{\mathbbm{1}}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newcommand{\E}{\operatorname{\mathbb{E}}}
+\renewcommand{\P}{\operatorname{\mathbb{P}}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Cor}{\operatorname{Cor}}
+\newcommand{\expect}[1]{\mathbb{E}\left(#1\right)}
+\newcommand{\pr}[1]{\mathbb{P}\left(#1\right)}
+\newcommand{\var}[1]{\operatorname{Var}\left(#1\right)}
+\newcommand{\cov}[1]{\operatorname{Cov}\left(#1\right)}
+%\newcommand{\cor}[1]{\operatorname{Cor}\left(#1\right)}
+\newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+\def\iid{\stackrel{\rm iid}{\sim}}
+\def\Bin{\text{Bin}}
+\def\Unif{\text{Unif}}
+\def\lsto{\stackrel{\rm sto}{\leq}}
+\def\gsto{\stackrel{\rm sto}{\geq}}
+
+\begin{document}
+% --------------------------------------------------------------
+% Start here
+% --------------------------------------------------------------
+\title{4. Cremer, Rao, and Fisher}%replace X with the appropriate number
+\author{GULP Winter 2015} %if necessary, replace with your course title
+\maketitle
+
+\section{Lower bound for the variance of unbiased estimators}
+
+The discussion is under the assumption of squared loss. Therefore we have the bias-variance decomposition discussed last time. If we have an unbiased estimator, then the loss is equivalent to the variance of the estimator. Here we propose a lower bound of the variance of the unbiased estimators, which is independent of the form of the estimators.
+
+Suppose we have a random sample $X$ and some unbiased estimator $\delta(X)$ for $g(\theta)$. Define a \textbf{score variable} $V = \frac{\partial}{\partial \theta} \ln f(X;\theta)$. We can derive several properties for this variable. Under some regular conditions (which enables us to switch the integration and the differential operator), 
+$$
+\E (V) = \int  [\frac{\partial}{\partial \theta} \ln f(x;\theta)] f(x;\theta) dx = \int \frac{1}{f(x;\theta)}[\frac{\partial}{\partial \theta} f(x;\theta)] f(x;\theta) dx = \int \frac{\partial}{\partial \theta} f(x;\theta)  dx = 0
+$$
+\begin{eqnarray*}
+\cov{V,\delta}& =& \E (V\delta(X) ) = \int \delta(x) \frac{1}{f(x;\theta)}[\frac{\partial}{\partial \theta} f(x;\theta)] f(x;\theta) dx\\& =&  \int \frac{\partial}{\partial \theta} \delta(x) f(x;\theta)  dx =  \frac{\partial}{\partial \theta} \int \delta(x) f(x;\theta)  dx = g'(\theta)
+\end{eqnarray*}
+
+Using Cauchy-Schwartz inequality we have
+$$
+\sqrt{\var{V} \var{\delta}} \geq \cov{V,\delta},
+$$
+which is just
+$$
+\var{\delta} = \frac{\cov{V,\delta}^2}{\var{V}} = \frac{(g'(\theta))^2}{\E (V^2)}
+$$
+
+We define the right hand side as the \textbf{Cremer-Rao Bound}, and $\E (V^2) $ as the \textbf{Fisher information}, denoted as $I(\theta)$. By definition, 
+$$
+I(\theta) = \E ((\frac{\partial}{\partial \theta} \ln f(X,\theta))^2)
+$$
+
+\section{Some properties of the Fisher information}
+If you have $n$ iid samples, your Fisher information will be $n$ times of the information carried by a single observation. It is necessary to have iid setting here. 
+
+Another important equation which simplifies a lot of calculations is that 
+$$
+I(\theta) =  - \E((\frac{\partial^2}{\partial \theta^2} \ln f(X,\theta)))
+$$
+A sketch of proof is as follows. From the original definition we have 
+\begin{eqnarray*}
+I(\theta) & = & \E ((\frac{\partial}{\partial \theta} \ln f(X,\theta))^2) \\
+& = & \int (\frac{1}{f(x;\theta)})^2[\frac{\partial}{\partial \theta} f(x;\theta)]^2 f(x;\theta) dx ,
+\end{eqnarray*}
+while 
+\begin{eqnarray*}
+ - \E((\frac{\partial^2}{\partial \theta^2} \ln f(X,\theta))) & = & -\int  (\frac{\partial^2}{\partial \theta^2} \ln f(x,\theta)) f(x,\theta) dx \\& = &  -\int 
+\frac{\partial}{\partial \theta} (\frac{1}{f(x;\theta)} \cdot \frac{\partial}{\partial \theta} f(x;\theta) )  f(x;\theta) dx \\ & = & - \int\{ (\frac{1}{f(x;\theta)})^2[\frac{\partial}{\partial \theta} f(x;\theta)]^2 + \frac{1}{f(x;\theta)} \frac{\partial^2}{\partial \theta^2} f(x;\theta)\} f(x;\theta) dx \\ &= &  \int (\frac{1}{f(x;\theta)})^2[\frac{\partial}{\partial \theta} f(x;\theta)]^2 f(x;\theta) dx .
+\end{eqnarray*}
+For the latter part, just move the second order differentiate operator out of the integration sign and you will get zero.
+% --------------------------------------------------------------
+% You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+\end{document} 

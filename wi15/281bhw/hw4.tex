@@ -1,0 +1,113 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\1}{\mathbbm{1}}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newcommand{\E}{\operatorname{\mathbb{E}}}
+\renewcommand{\P}{\operatorname{\mathbb{P}}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Cor}{\operatorname{Cor}}
+\newcommand{\expect}[1]{\mathbb{E}\left(#1\right)}
+\newcommand{\pr}[1]{\mathbb{P}\left(#1\right)}
+\newcommand{\var}[1]{\operatorname{Var}\left(#1\right)}
+\newcommand{\cov}[1]{\operatorname{Cov}\left(#1\right)}
+%\newcommand{\cor}[1]{\operatorname{Cor}\left(#1\right)}
+\newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+\def\iid{\stackrel{\rm iid}{\sim}}
+\def\Bin{\text{Bin}}
+\def\Unif{\text{Unif}}
+\def\lsto{\stackrel{\rm sto}{\leq}}
+\def\gsto{\stackrel{\rm sto}{\geq}}
+
+\begin{document}
+% --------------------------------------------------------------
+% Start here
+% --------------------------------------------------------------
+\title{Homework 4}%replace X with the appropriate number
+\author{MATH 281B} %if necessary, replace with your course title
+\maketitle
+\begin{exercise}{6.9.1.13}
+\end{exercise}
+
+The first part is just direct integration and the second part requires delta method.
+
+\begin{exercise}{4.8.1.2}
+\end{exercise}
+
+Check Wikipedia for details. The mode can be derived by taking derivatives.
+
+\begin{exercise}{4.8.1.6}
+\end{exercise}
+
+Recognize that under Beta prior, the posterior is conjugate to the prior and the parameter is given by the Example 1.5
+
+For the estimator of $p(1-p)$, you need to find
+$$
+\E (p(1-p) | X) = \int p (1-p) \pi (p |X) dp
+$$
+where $\pi(p|X)$ is the posterior distribution.
+
+\begin{exercise}{4.8.1.9}
+\end{exercise}
+
+First derive that the posterior is still an Gamma distribution, with parameter 
+$$
+g' = g + n\bar{X}, \alpha'  = \frac{\alpha}{n\alpha +1}.
+$$
+Note that you don't need to derive the exact nasty constant before the distributions. You just need to recognize the core of the posterior.
+
+With this in hand, it is easy to see that the posterior mean is a weighted mean of the sample mean (MLE) and the prior mean.
+
+\begin{exercise}{5.8.1.9}
+\end{exercise}
+
+This is a direct calculation problem.
+
+\begin{exercise}{5.8.1.10}
+\end{exercise}
+
+This is also a direct calculation problem...
+
+\begin{exercise}{5.8.1.12}
+\end{exercise}
+
+Just do a graph with some calculation with the formula derived before. Intuitively they should agree with each other when $n$ is big.
+
+\begin{exercise}{Asymptotic analysis of the minimax estimator}
+\end{exercise}
+Note that
+$$
+\hat{p}_n - p = \frac{X/n - \frac{1}{2\sqrt{n} }}{1 + \frac{1}{\sqrt{n}}} - p
+= \frac{X/n - p}{1 + \frac{1}{\sqrt{n}}} + \frac{\frac{1}{\sqrt{n}}(\frac{1}{2} - p) }{1 + \frac{1}{\sqrt{n}}}.
+$$
+So, by multiplying $\sqrt{n}$, the first part can be applied CLT, while the second part goes to a constant.
+
+\begin{exercise}{Change a loss function to make $X/n$ minimax}
+\end{exercise}
+
+It is easy to see that the loss function will make $X/n$ constant risk. To show that this is a Bayes estimator, just write out the flat prior and you may find that the posterior is equal to the likelihood. Thus taking the mean on the likelihood density solves the question.
+% --------------------------------------------------------------
+% You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+\end{document} 

@@ -1,0 +1,119 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\1}{\mathbbm{1}}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newcommand{\E}{\operatorname{\mathbb{E}}}
+\renewcommand{\P}{\operatorname{\mathbb{P}}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Cor}{\operatorname{Cor}}
+\newcommand{\expect}[1]{\mathbb{E}\left(#1\right)}
+\newcommand{\pr}[1]{\mathbb{P}\left(#1\right)}
+\newcommand{\var}[1]{\operatorname{Var}\left(#1\right)}
+\newcommand{\cov}[1]{\operatorname{Cov}\left(#1\right)}
+%\newcommand{\cor}[1]{\operatorname{Cor}\left(#1\right)}
+\newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+\def\iid{\stackrel{\rm iid}{\sim}}
+\def\Bin{\text{Bin}}
+\def\Unif{\text{Unif}}
+\def\lsto{\stackrel{\rm sto}{\leq}}
+\def\gsto{\stackrel{\rm sto}{\geq}}
+
+\begin{document}
+% --------------------------------------------------------------
+% Start here
+% --------------------------------------------------------------
+\title{Homework 1}%replace X with the appropriate number
+\author{MATH 281B} %if necessary, replace with your course title
+\maketitle
+\begin{exercise}{8.1}
+\end{exercise}
+
+Use the fact
+$$
+\1 (g(X) \geq \epsilon) \leq \frac{g(X)}{\epsilon} \1 (g(X) \geq \epsilon)
+$$
+and 
+$$
+\P (g(X) \geq \epsilon ) = \E (\1 (g(X) \geq \epsilon))
+$$
+
+The second part follows immediately.
+
+\begin{exercise}{8.2}
+\end{exercise}
+
+To show that $\delta_n$ is consistent, first recognize that $\bar{X}$ is converging to the true mean in probability. (why?) And consider events $\{|\bar{X} - \theta| > \xi \}$ and $\delta_n \neq \bar{(X)}$.
+
+In order to measure the event $\{|\delta_n - \theta| > \xi\}$, notice that this event happens only if at least one of the two events before, happens. And you have good control of the two events, so that you can prove the convergence.
+
+The second part follows with brute force.
+
+\begin{exercise}{8.8}
+\end{exercise}
+
+(a) is a test on the analysis. Get two close approximations and take the larger $n$.
+
+(b) is tricky. The target function is $\1 (\theta = 0)$, then the estimator should shrink to $0$ when $\theta \neq 0$ and shrink to $1$ when $\theta =1$. Naturally we may think about the form
+$$
+\1 (|\bar{X} |\leq c_n)
+$$
+and set $c_n \rightarrow 0$. Then when $\theta \neq 0$, $\bar{X} $ converges to some nonzero numbers, then the indicator goes to zero.
+
+The thing is to choose $c_n$ properly so that it goes to $1$ when $\theta =0$. This is left as a problem.
+
+\begin{exercise}{8.11}
+\end{exercise}
+
+All you need to check is that $\var {\bar{X}}$ goes to zero or not. This can be done by brute force.
+
+\begin{exercise}{8.12}
+\end{exercise}
+
+Basically this is a direct application of Slutsky's theorem. And notice the fact that converging in law to some constant is equivalent to converging in probability to the constant.
+
+\begin{exercise}{8.13}
+\end{exercise}
+
+Check the cdf of $Y$ and you may find what you need.
+
+\begin{exercise}{8.15/16}
+\end{exercise}
+
+Delta method will save you.
+
+\begin{exercise}{8.17}
+\end{exercise}
+
+First recognize the limiting distribution of the original sequence. And apply delta method to the transformation.
+
+\begin{exercise}{8.18}
+\end{exercise}
+
+Follow the instruction of the question and do a integration. Pay attention that when $n=2$ you may find a different answer.
+
+% --------------------------------------------------------------
+% You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+\end{document} 

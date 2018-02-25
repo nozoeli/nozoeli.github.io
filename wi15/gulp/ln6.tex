@@ -1,0 +1,112 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\1}{\mathbbm{1}}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newcommand{\E}{\operatorname{\mathbb{E}}}
+\renewcommand{\P}{\operatorname{\mathbb{P}}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Cor}{\operatorname{Cor}}
+\newcommand{\expect}[1]{\mathbb{E}\left(#1\right)}
+\newcommand{\pr}[1]{\mathbb{P}\left(#1\right)}
+\newcommand{\var}[1]{\operatorname{Var}\left(#1\right)}
+\newcommand{\cov}[1]{\operatorname{Cov}\left(#1\right)}
+%\newcommand{\cor}[1]{\operatorname{Cor}\left(#1\right)}
+\newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\def\iid{\stackrel{\rm iid}{\sim}}
+\def\Bin{\text{Bin}}
+\def\Unif{\text{Unif}}
+\def\lsto{\stackrel{\rm sto}{\leq}}
+\def\gsto{\stackrel{\rm sto}{\geq}}
+
+\begin{document}
+% --------------------------------------------------------------
+% Start here
+% --------------------------------------------------------------
+\title{6. Sufficiency and completeness}%replace X with the appropriate number
+\author{GULP Winter 2015} %if necessary, replace with your course title
+\maketitle
+
+\section{Sufficient statistics}
+
+Here we first give the definition of the sufficient statistics.
+
+\begin{definition}
+ Given a model parameterized with $\theta$ and a sample $X$, a statistic $T$ is sufficient if the conditional distribution $X|T$ is free of $\theta$. 
+\end{definition}
+
+It is trivial to see that the whole data is sufficient. And in most cases, the order statistics are sufficient, since once given the order statistics, the probability of observing the data is $1/n!$. 
+
+Here is another example.
+
+\textbf{Example} Suppose the data is from Poisson distribution with parameter $\lambda$. Then the sample sum $T = \sum_i X_i$ is sufficient.
+
+\begin{proof}
+Suppose we are given $T =t$ and we calculate $\P (X_1 = x_1, \ldots X_n =x_n| T=t)$. We have
+\begin{eqnarray*}
+\P (X_1 = x_1, \ldots X_n =x_n| T=t) &=&  \frac{ \P (X_1 = x_1, \ldots X_n =x_n, T=t) }{\P (T = t)}\\& = & \frac{ \P (X_1 = x_1, \ldots,X_{n-1} = x_{n-1}, X_n =t  - \sum_{i=1}^{n-1} x_i ) }{\P (T = t)} \\ & = &  \frac{\frac{\lambda^{x_1}}{x_1 !} e^{-\lambda} \times \cdots \frac{\lambda^{t  - \sum_{i=1}^{n-1} x_i}}{(t  - \sum_{i=1}^{n-1} x_i)!} e^{-\lambda}}{\frac{(n\lambda)^t}{t!} e^{-n\lambda}} \\ &=& \frac{\frac{1}{x_1 !}  \times \cdots \frac{1}{(t  - \sum_{i=1}^{n-1} x_i)!}} {\frac{n^t}{t!}}
+\end{eqnarray*}
+which is free of $\lambda$.
+\end{proof}
+
+It can be shown that the sample sum is sufficient in binomial, normal and Poisson case. And the maximal of the data is sufficient for uniform distribution ${0,\theta}$. The sufficiency describes the lossless property of the data compression. If the statistic loses information of the parameter, then the statistic will not be sufficient.
+
+\section{Completeness}
+
+We first give the definition.
+
+\begin{definition}
+ Given a model parameterized with $\theta$ and a sample $X$, a statistic $T$ is complete if there exists some $f$ such that $\E_\theta f(T) = 0$ for all $\theta$, then $f = 0$ almost surely.
+\end{definition}
+
+On the other side, a statistic containing ancillary information will not be complete. A complete statistic will only contain the information of the parameter. 
+
+\textbf{Example} A binomial sample $X$ from the model with parameter $(n,p)$ is complete.
+\begin{proof}
+If some function $f$ satisfies $\E_p f(X) = 0$ for all $p$, then
+$$
+\sum_{i=1}^n f(i) {n\choose i}  p^i (1-p)^{n-i}  = 0 , \forall p.
+$$
+By compare the coefficient of the polynomials, we have $f(i) = 0$ for all $i$. 
+\end{proof}
+
+\section{Application}
+
+The direct application is the following theorem.
+
+\begin{theorem}{(Lehmann-Scheffe)}
+Any unbiased estimator based on a sufficient and complete statistic is UMVUE.
+\end{theorem}
+and it is direct that we have the following.
+\begin{theorem}{(Rao-Blackwell)}
+Suppose $U$ is an unbiased estimator, and $T$ is sufficient and complete, then $\E (U |T)$ is UMVUE.
+\end{theorem}
+
+These theorems are widely used in theory and applications. 
+% --------------------------------------------------------------
+% You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+\end{document} 

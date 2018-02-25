@@ -1,0 +1,93 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\1}{\mathbbm{1}}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newcommand{\E}{\operatorname{\mathbb{E}}}
+\renewcommand{\P}{\operatorname{\mathbb{P}}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Cor}{\operatorname{Cor}}
+\newcommand{\expect}[1]{\mathbb{E}\left(#1\right)}
+\newcommand{\pr}[1]{\mathbb{P}\left(#1\right)}
+\newcommand{\var}[1]{\operatorname{Var}\left(#1\right)}
+\newcommand{\cov}[1]{\operatorname{Cov}\left(#1\right)}
+%\newcommand{\cor}[1]{\operatorname{Cor}\left(#1\right)}
+\newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+\def\iid{\stackrel{\rm iid}{\sim}}
+\def\Bin{\text{Bin}}
+\def\Unif{\text{Unif}}
+\def\lsto{\stackrel{\rm sto}{\leq}}
+\def\gsto{\stackrel{\rm sto}{\geq}}
+
+\begin{document}
+% --------------------------------------------------------------
+% Start here
+% --------------------------------------------------------------
+\title{5. Examples, examples, and counterexamples}%replace X with the appropriate number
+\author{GULP Winter 2015} %if necessary, replace with your course title
+\maketitle
+
+\section{Unbiased estimator that hits the C-R Bound}
+
+So far we know that if we have an unbiased estimator that has a variance equivalent to the C-R bound, then the unbiased estimator is the best among all the unbiased estimators. Here we show some examples, in both discrete and continuous case.
+
+\textbf{Binomial}. Suppose we have one sample observation $X$ coming from binomial distribution $(n,p)$ and we need to estimate $p$. One natural unbiased estimator is $X/n$, with variance $p(1-p)/n$. Then we seek for the Fisher information of the observation:
+\begin{eqnarray*}
+I(p) &=& - \E((\frac{\partial^2}{\partial p^2} \ln f(X,p)))\\& = & - \E((\frac{\partial^2}{\partial p^2} \ln ({n\choose k} p^X (1-p)^{n-X} ))) \\ & = &  -\E ( - \frac{X}{p^2} - \frac{n-X}{(1-p)^2}) \\ &=& \frac{n}{p(1-p)}
+\end{eqnarray*}
+Since the C-R bound is just the inverse of the Fisher information, we know that the estimator is actually hitting the lower bound.
+
+\textbf{Normal Variance}. Suppose we have $n$ independent identically distributed samples from $N(\mu, \sigma^2)$ with known $\mu$. We propose the following estimator:
+$$
+S^2 = \frac{\sum_{i=1}^n(X_i -\mu)^2 }{n}
+$$
+Since for single observation we have $\E (X_i -\mu)^2 = \sigma^2$, $S^2$ is an unbiased estimator. Using the tool of $\chi^2$ distribution we can justify that $\var{S^2} = 2\sigma^4/n$. Then we calculate the Fisher information for one observation:
+\begin{eqnarray*}
+I(\sigma^2) &=& - \E((\frac{\partial^2}{\partial (\sigma^2)^2} \ln f(X,\mu,\sigma^2)))\\& = & - \E((\frac{\partial^2}{\partial p^2} \ln (\frac{1}{\sqrt{2\pi \sigma^2} }e^{-\frac{(X - \mu)^2}{2\sigma^2}} ))) \\ & =& - \E (\frac{1}{2(\sigma^2)^2} - \frac{(X - \mu)^2}{(\sigma^2)^3})    \\ &=& \frac{1}{2\sigma^4}
+\end{eqnarray*}
+$n$ samples contains $nI(\sigma^2)$ information therefore the C-R bound is $1/nI(\sigma^2) = 2\sigma^4 /n$. Therefore $S^2$ is also the best unbiased estimator.
+
+You may justify that the sample mean of the Poisson samples is the best unbiased estimator to estimate the $\lambda$, and sample mean is also best for normal samples.
+
+\section{Unbiased estimator that does not hit the C-R Bound, and other}
+
+One simple example shows that the C-R bound can not be reached every time. Suppose we want to estimate $\sigma^2$ with $\mu$ unknown, under normal distribution settings. It can be shown (at the next time) that the best unbiased estimator is
+$$
+S^2 = \frac{\sum_{i=1}^n(X_i -\bar{X})^2 }{n-1}.
+$$
+The variance for this estimator is $2\sigma^4 / (n-1)$ which is strictly larger than the C-R bound shown before.
+
+Also, sometimes the method will break down because the density function is badly behaved. And sometimes it is hard to tell that they are badly behaved. We have a typical example when this method breaks down.
+
+\textbf{Uniform distribution}. Suppose we have samples from $U(0,\theta)$, and we are interested with $\theta$. Some calculation will give you the Fisher information for one observation is $1/\theta^2$, then the C-R bound for $n$ observations should be $\theta^2/n$. However, we can construct an unbiased estimator which has a smaller variance.
+
+Consider the estimator $(n+1)X_{(n)}/n$, where $X_{(n)}$ is the largest observation among $n$ samples. It can be shown that this estimator is unbiased, with variance $\theta^2/(n^2+n)$. This is much less than the C-R bound. 
+
+The reason that the method fail is that we can not interchange the partial differentiation and the integration as we have done before. The critical point is that the support of the uniform distribution is depending on the parameter, which is not a good behavior. 
+
+There are a bunch of the assumptions that the density function has to satisfy, in order to make this C-R bound calculation valid. In general it can be roughly described as 'smooth enough against the parameter' and 'support independent of the parameter'. 
+% --------------------------------------------------------------
+% You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+\end{document} 

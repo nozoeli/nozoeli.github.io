@@ -1,0 +1,186 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\1}{\mathbbm{1}}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newcommand{\E}{\operatorname{\mathbb{E}}}
+\renewcommand{\P}{\operatorname{\mathbb{P}}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Cor}{\operatorname{Cor}}
+\newcommand{\expect}[1]{\mathbb{E}\left(#1\right)}
+\newcommand{\pr}[1]{\mathbb{P}\left(#1\right)}
+\newcommand{\var}[1]{\operatorname{Var}\left(#1\right)}
+\newcommand{\cov}[1]{\operatorname{Cov}\left(#1\right)}
+%\newcommand{\cor}[1]{\operatorname{Cor}\left(#1\right)}
+\newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+\def\iid{\stackrel{\rm iid}{\sim}}
+\def\Bin{\text{Bin}}
+\def\Unif{\text{Unif}}
+\def\lsto{\stackrel{\rm sto}{\leq}}
+\def\gsto{\stackrel{\rm sto}{\geq}}
+
+\begin{document}
+% --------------------------------------------------------------
+% Start here
+% --------------------------------------------------------------
+\title{Midterm}%replace X with the appropriate number
+\author{MATH 281B} %if necessary, replace with your course title
+\maketitle
+\begin{problem}{1}
+\end{problem}
+
+(a). The shape parameter is $alpha$ and the scale parameter is $\beta$. The way to determine this is that if $X$ follows $\Gamma(\alpha,\beta)$ then from the density function we can tell that $cX$ is following $Gamma(\alpha,c\beta)$. Therefore $\beta$ is a scale parameter.
+
+(b). The posterior $\pi(\lambda | X)$ is following
+$$
+\pi (\lambda |X) \propto \pi(\lambda) f(X|\lambda) \propto \lambda^{\alpha -1} e^{-\lambda/\beta} \lambda^{\sum_i X_i} e^{-n\lambda} \ = \lambda^{\alpha+\sum_i X_i -1 }  e^{-(n+1/\beta)\lambda}
+$$
+Observe and we can find that the right hand side is the kernel of the Gamma distribution with parameter $(\alpha +\sum_i X_i, \beta/(n\beta +1))$, so it is belonging to the Gamma family.
+
+(c). From the formula of Gamma distribution, the posterior mean is 
+$$
+(\alpha +\sum_i X_i) \cdot \frac{\beta}{(n\beta +1)}
+$$ 
+The reason to choose posterior mean to be the Bayes estimator is that it minimize the Bayes risk \textbf{under the squared loss function}. A simple argument can be as follows.
+$$
+\E_{\lambda|X} ((\delta - \lambda)^2 ) = \E_{\lambda|X} (\delta^2 - 2\delta \lambda + \lambda^2 ) = \delta^2 -2\delta \E (\lambda|X) + \E (\lambda^2|X)
+$$
+Then it is trivial to see that $\delta  = \E (\lambda|X)$ minimizes the function.
+
+(d). Direct algebra shows that
+$$
+\hat{\lambda} = (\alpha +\sum_i X_i) \cdot \frac{\beta}{(n\beta +1)} = \frac{1}{n\beta +1} \cdot (\alpha \beta) + \frac{n\beta}{n\beta +1} \cdot \bar{X},
+$$
+where $\alpha \beta$ is the mean of the prior, and $\bar{X}$ is the usual frequentist's estimator.
+
+(e). From central limit theorem we know that
+$$
+\sqrt{n} (\bar{X} - \lambda) \xrightarrow{D} N(0,\lambda),
+$$
+since Poisson distribution has mean and variance $\lambda$. What's more we have
+$$
+\frac{n\beta}{n\beta +1} \rightarrow 1,  \frac{\sqrt{n}}{n\beta +1}  \rightarrow 0,
+$$
+therefore if we combine the parts together, along with Slutsky's lemma, we well get
+$$
+\sqrt{n} (\hat{\lambda} - \lambda) = \sqrt{n} (\frac{n\beta}{n\beta +1} \cdot \bar{X} - \lambda) + \frac{\sqrt{n}}{n\beta +1} \cdot (\alpha \beta) \xrightarrow{D} N(0,\lambda)
+$$
+
+(f). Since $\hat{\lambda}$ is the unique Bayes estimator under the Bayes rule, it is admissible.
+
+(g). It is not true that the posterior variance is guaranteed smaller. However, if we do the variance decomposition,
+$$
+\var{\lambda}  = \var{\E (\lambda|X)} + \E (\var{ \lambda |X}) \geq \E (\var{ \lambda |X}) ,
+$$
+we can see that the prior variance is no less than the \textbf{expectation} of the posterior variance. Clearly this gives no clue of any guaranteed behavior, but you may claim that with $n$ increasing, the probability of getting a smaller posterior variance is increasing to $1 $.
+
+(h). By another version of the variance decomposition, we have
+$$
+\var{X} = \var{ \E (X |\lambda) } + \E( \var{X|\lambda}).
+$$
+Note that $X|\lambda$ follows Poisson distribution indexed by $\lambda$. Therefore 
+$$
+\E (X |\lambda) = \var{X|\lambda} = \lambda.
+$$
+And clearly
+$$
+\var{X} = \var{ \lambda } + \E( \lambda) = \alpha \beta + \alpha \beta^2
+$$
+since $\lambda $ follows $\Gamma(\alpha,\beta)$.
+
+\begin{problem}{2}
+\end{problem}
+
+(a). By the behavior of the sample median we have
+$$
+\sqrt{n} (\hat{\alpha}_1 - \alpha) \xrightarrow{D} N(0, \frac{1}{4f(\alpha)^2}),
+$$ 
+where $f(\cdot)$ is the density function of the uniform distribution. Plug in the numbers we can get 
+$$
+\sqrt{n} (\hat{\alpha}_1 - \alpha) \xrightarrow{D} N(0, 4).
+$$ 
+
+For $\hat{\alpha}_2$, central limit theorem tells us
+$$
+\sqrt{n} (\hat{\alpha}_2 - \alpha) \xrightarrow{D} N(0, \var{X_1}),
+$$
+and we have $\var{X_1} = (\alpha+2 - (\alpha-2) )^2 /12 = 4/3$. Therefore
+$$
+\sqrt{n} (\hat{\alpha}_2 - \alpha) \xrightarrow{D} N(0, \frac{4}{3}).
+$$
+Thus we have the ARE as
+$$
+ARE(\hat{\alpha}_2 , \hat{\alpha}_1 ) = \frac{4}{\frac{4}{3}} = 3
+$$
+
+(b). If $\hat{\alpha}_1$ uses $1000$ samples, then since $\hat{\alpha}_2$ has three times asymptotic efficiency, it will only need $1000/3 = 334$ samples to match the performance.
+
+(c). The MLE, or the UMVUE, based what have been learned in 281A, is found by 
+$$
+\hat{\alpha}_3 = \frac{X_{(1)} + X_{(n)}}{2}.
+$$
+
+There are many ways to show that this estimator is converging to $\alpha$ with speed $n$, which is much faster than $\hat{\alpha}_1$ and $\hat{\alpha}_2$, with speed $\sqrt n$. And this tells you that $ARE(\hat{\alpha}_1,\hat{\alpha}_3) = 0$. 
+
+To show this, we first bound the variance of $\hat{\alpha}_3$. By Cauchy-Schwartz inequality,
+$$
+\var{\hat{\alpha}_3} = \var{\frac{X_{(1)} + X_{(n)}}{2}} \leq 2(\var{\frac{X_{(1)}}{2}}) + 2(\var{\frac{X_{(n)}}{2}}).
+$$
+And, use the property of this symmetric distribution, we can expect $\var{X_{(1)}} = \var{X_{(n)}}$. Therefore 
+$$
+\var{\hat{\alpha}_3} \leq 4\var{\frac{X_{(n)}}{2}} = \var{X_{(n)}}
+$$
+
+By the probability equality,
+$$
+\P (X_{(n)} \leq x) = \P (X_i \leq x, i=1,\ldots,n ) = \P(X_1 \leq x)^n = (\frac{x - (\alpha-2)}{4})^n,
+$$
+we have the density for $X_{(n)}$ as
+$$
+f_{X_{(n)}} (x) = \frac{n(x - (\alpha-2))^{n-1}}{4^n}.
+$$
+By simple integration we can find that
+$$
+\E (X_{(n)}) = \frac{n}{n+1} = \frac{4n}{n+1} + \alpha -2
+$$
+and 
+$$
+\E (X_{(n)}^2) = \frac{16n}{n+2} + 2(\alpha -2) ( \frac{4n}{n+1} ) + (\alpha-2)^2.
+$$
+Then the variance is given by
+$$
+\var{X_{(n)}} = \E (X_{(n)}^2) - (\E (X_{(n)}))^2 = \frac{16n}{(n+1)^2(n+2)}.
+$$
+Thus, inflating $\hat{\alpha}_3$ by $\sqrt n$ will still give an asymptotic variance $0$, which shows that $ARE(\hat{\alpha}_1,\hat{\alpha}_3) = 0$.
+
+Another way is recognizing that asymptotically $n( 2+\alpha - X_{(n)})$ is following exponential distribution. The argument is as follows. Denote $T =  n( 2+\alpha - X_{(n)})$, and
+$$
+\P (T \geq t ) = \P (X_{(n)} \leq 2+\alpha- \frac{a}{n} ) = (1 - \P (X_1 \geq 2+\alpha- \frac{a}{n} ))^n = (1 - \frac{a}{4n})^n \rightarrow e^{-\frac{a}{4}}.
+$$
+Therefore $T$ is asymptotically distributed as $exp(4)$. Since $\sqrt{n}(\hat{\alpha}_3)$ has a smaller variance of $T /\sqrt{n}$, and the latter has asymptotic variance going to zero, we conclude that $\sqrt{n}(\hat{\alpha}_3)$ has asymptotic variance zero, which indicates that $ARE(\hat{\alpha}_1,\hat{\alpha}_3) = 0$.
+
+% --------------------------------------------------------------
+% You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+\end{document} 

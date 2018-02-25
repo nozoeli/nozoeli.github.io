@@ -1,0 +1,87 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\1}{\mathbbm{1}}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newcommand{\E}{\operatorname{\mathbb{E}}}
+\renewcommand{\P}{\operatorname{\mathbb{P}}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Cor}{\operatorname{Cor}}
+\newcommand{\expect}[1]{\mathbb{E}\left(#1\right)}
+\newcommand{\pr}[1]{\mathbb{P}\left(#1\right)}
+\newcommand{\var}[1]{\operatorname{Var}\left(#1\right)}
+\newcommand{\cov}[1]{\operatorname{Cov}\left(#1\right)}
+%\newcommand{\cor}[1]{\operatorname{Cor}\left(#1\right)}
+\newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\def\iid{\stackrel{\rm iid}{\sim}}
+\def\Bin{\text{Bin}}
+\def\Unif{\text{Unif}}
+\def\lsto{\stackrel{\rm sto}{\leq}}
+\def\gsto{\stackrel{\rm sto}{\geq}}
+
+\begin{document}
+% --------------------------------------------------------------
+% Start here
+% --------------------------------------------------------------
+\title{7. Examples, Ups and Downs for UMVUE}%replace X with the appropriate number
+\author{GULP Winter 2015} %if necessary, replace with your course title
+\maketitle
+
+\section{Common Examples}
+
+We start with the sample mean. The sample mean is the UMVUE for the parameter when sample is Bernoulli distributed, Poisson distributed and Normally distributed. The way to show this is to use the C-R bound and check that the sample mean actually reaches the C-R bound. 
+
+The sample variance, which is 
+$$
+S^2 = \frac{\sum_{i=1}^n(X_i -\bar{X})^2 }{n-1}
+$$
+is the UMVUE for the normal sample when the true mean is unknown. The way to prove that is using the fact that $(\sum_i X_i , \sum_i X_i^2)$ is sufficient and complete, and use Lehmann-Scheffe theorem as follows:
+$$
+S^2 = \frac{\sum_{i=1}^n(X_i -\bar{X})^2 }{n-1} = \frac{\sum_{i=1}^n X_i^2 -n(\bar{X})^2 }{n-1}.
+$$
+This is an unbiased estimator for the parameter based on the sufficient and complete statistic. So it is UMVUE.
+
+The order statistics are widely used in the text when the support is related to the parameter. Take uniform distribution $(0,\theta)$ as an example. The unbiased estimator based on the sample mean $2\bar{X}$ has a variance of $\theta^2/3 $, while the UMVUE, $(n+1)/n\cdot X_{(n)}$, have a variance of $\theta^2/((n+2)n)$. You may see that the advantage of the UMVUE is huge comparing to the estimator based on the sample mean.
+
+\section{Comparing to MLE}
+
+The question is that, is UMVUE always good? Not really. It is optimal in the range of the unbiased estimators, but not anymore when we expand the range of the estimators, even when we keep the form of the loss function.
+
+Consider the square loss and the problem of estimating the normal sample variance when the population mean is unknown. The UMVUE gives the total risk as $2\sigma^4/(n-1)$ by using the fact that $\frac{\sum_{i=1}^n(X_i -\bar{X})^2 }{\sigma^2}$ follows $\chi^2$ distribution with degree of freedom $n-1$. 
+
+The MLE of $\sigma^2$ has the form of
+$$
+\frac{\sum_{i=1}^n(X_i -\bar{X})^2 }{n}
+$$
+which is biased, with a bias of $\sigma^2/n$. Using the same fact before we can get the variance of this estimator as $2(n-1)\sigma^4/n^2$. Therefore the total loss equals
+$$
+(\frac{\sigma^2}{n})^2 + \frac{2(n-1) \sigma^4}{n^2} = \frac{(2n-1)\sigma^4}{n^2}.
+$$
+This is strictly less than the risk of UMVUE. This tell us that UMVUE is even strictly worse than the MLE. 
+% --------------------------------------------------------------
+% You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+\end{document} 
