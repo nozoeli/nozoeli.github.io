@@ -1,0 +1,14 @@
+# jemdoc: menu{MENU}{research.html}
+= Research
+
+
+I am interested in a wide range of topics in statistics. Currently I am working on these topics:
+- Detection and localization of anomalies;
+- Clustering algorithms analysis and design; 
+- Robust and nonparametric methods, such as rankings;
+
+And many more interesting problems in theory and applications.
+
+Publications:
+: {[http://arxiv.org/abs/1604.07449 Distribution-free Detection of a Submatrix]}
+	[http://www.math.ucsd.edu/~eariasca/ E. Arias-Castro], Y. Liu, Journal of Multivariate Analysis, accepted. 2017.
