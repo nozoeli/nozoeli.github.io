@@ -1,0 +1,126 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newcommand{\E}{\operatorname{\mathbb{E}}}
+\renewcommand{\P}{\operatorname{\mathbb{P}}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Cor}{\operatorname{Cor}}
+\newcommand{\expect}[1]{\mathbb{E}\left(#1\right)}
+\newcommand{\pr}[1]{\mathbb{P}\left(#1\right)}
+\newcommand{\var}[1]{\operatorname{Var}\left(#1\right)}
+\newcommand{\cov}[1]{\operatorname{Cov}\left(#1\right)}
+%\newcommand{\cor}[1]{\operatorname{Cor}\left(#1\right)}
+\newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+\def\iid{\stackrel{\rm iid}{\sim}}
+\def\Bin{\text{Bin}}
+\def\Unif{\text{Unif}}
+\def\lsto{\stackrel{\rm sto}{\leq}}
+\def\gsto{\stackrel{\rm sto}{\geq}}
+
+\begin{document}
+% --------------------------------------------------------------
+% Start here
+% --------------------------------------------------------------
+\title{Midterm}%replace X with the appropriate number
+\author{MATH 281A} %if necessary, replace with your course title
+\maketitle
+\begin{problem}{1}
+\end{problem}
+
+1. Sufficiency means that the distribution of $X$ conditional on $\delta(X)$ has no relationship with $\theta$. You may use factorial theorem here since it is an equivalent statement. Completeness means that if you have a measurable function $g$ such that $\E_\theta (g(\delta(X))) = 0$ for any $\theta$ in the natural parameter space, then $g = 0$ almost surely.
+
+2. The density for such a distribution family is
+$$
+f_\mu(x) = \frac{1}{\sqrt{2\pi} 2\mu} \exp\{-\frac{(x - \mu)^2}{8\mu^2}\}
+$$
+which is equivalent to 
+$$
+f_\mu(x) = \frac{1}{\sqrt{2\pi} 2\mu} \exp\{-\frac{x^2}{8\mu^2}\ +\frac{x}{4\mu} - \frac{1}{8} \}
+$$
+Clearly this is an exponential family.
+
+3. Since the sample is iid, we simply multiply the density and this gives the joint density as
+$$
+f_\mu(x_1,x_2,\ldots,x_n) = (\frac{1}{\sqrt{2\pi} 2\mu})^n \exp\{-\frac{\sum_{i=1}^n x_i^2}{8\mu^2}\ +\frac{\sum_{i=1}^n x_i}{4\mu} - \frac{n}{8} \}
+$$
+Here we have used the result of (2).
+
+4. Factorization theorem show that $(\sum_{i=1}^n x_i,\sum_{i=1}^n x_i^2)$ is a sufficient statistic.
+
+5. The pair $(-\frac{1}{8\mu^2}\ ,\frac{1}{4\mu})$ can not fulfill an open set/open ball/square in $\mathbb{R}^2$. Therefore the theorem fails.
+
+6. Consider estimating $\mu^2$ by $\bar{X}^2$ and $\sum_{i=1}^n x_i^2$. Since we have $\bar{X}$ follows $N(\mu, 4\mu^2/n)$, we have
+$$
+\E_\mu(\bar{X}^2) = \mu^2 + 4\mu^2/n = \frac{n+4}{n} \mu^2
+$$
+By the formula of variance we have
+$$
+\E_\mu(X_1^2) = \mu^2 + 4\mu^2 = 5 \mu^2
+$$
+Therefore 
+$$
+\E_\mu (\frac{1}{5n}\sum_{i=1}^n X_i^2 - \frac{n}{n+4}\bar{X}^2) = 0
+$$
+for any $\mu$. So the statistic is not complete.
+
+\begin{problem}{2}
+\end{problem}
+
+For Poisson distribution we know that $\bar{X}$ is sufficient and complete. So the conditional expectation $\E ( (X_1 - X_2)^2 | \bar{X})$ is the UMVUE for $\E_\lambda ( (X_1 - X_2)^2)$ by Rao-Blackwell.
+
+By calculation we have
+$$
+\E_\lambda ( (X_1 - X_2)^2) = \E_\lambda(X_1^2 + X_2^2 - 2X_1X_2) = 2(\lambda +\lambda^2) - 2\lambda^2 = 2\lambda
+$$
+
+By observation we know that $2\bar{X}$ is an unbiased estimator for $2\lambda$ and is purely based on a sufficient and complete statistic. Therefore by Lehmann-Scheffe we know that $2\bar{X}$ is also a UMVUE for $2\lambda$. By the uniqueness of the UMVUE we know that $\E_\lambda ( (X_1 - X_2)^2) = 2\bar{X}$
+
+\begin{problem}{3}
+\end{problem}
+1. For a single sample, we have
+$$
+\log f_{\sigma^2}(x) = -\log(\sqrt{2\pi}) - \log (\sigma) - \frac{x^2}{2\sigma^2}
+$$
+Take twice derivative against $\sigma^2$ we know
+$$
+\frac{\partial^2 \log f_{\sigma^2}(x)}{\partial (\sigma^2)^2} = \frac{1}{2\sigma^4} - \frac{x^2}{\sigma^6}
+$$
+So the Fisher information for $X_1$ is just
+$$
+i(\sigma^2) = - \E_{\sigma^2}(\frac{\partial^2 \log f_{\sigma^2}(X)}{\partial (\sigma^2)^2}) = \frac{1}{2\sigma^4}
+$$
+
+2. The complete and sufficient statistic for the parameter is $\sum_{i=1}^n X_i^2$, however this statistic is not based on that. Therefore it is not UMVUE.
+
+3. Using Rao-Blackwell, $\E (X_1^{12}/ 10395 | \sum_{i=1}^n X_i^2)$ is the UMVUE. 
+
+4. The Creamer-Rao bound is calculated by
+$$
+\frac{(g'(\sigma^2))^2}{I(\sigma^2)} = \frac{(6(\sigma^2)^5)^2}{ni(\sigma^2)} = \frac{72\sigma^{24}}{n}
+$$
+
+% --------------------------------------------------------------
+% You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+\end{document} 

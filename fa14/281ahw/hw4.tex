@@ -1,0 +1,91 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newcommand{\E}{\operatorname{\mathbb{E}}}
+\renewcommand{\P}{\operatorname{\mathbb{P}}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Cor}{\operatorname{Cor}}
+\newcommand{\expect}[1]{\mathbb{E}\left(#1\right)}
+\newcommand{\pr}[1]{\mathbb{P}\left(#1\right)}
+\newcommand{\var}[1]{\operatorname{Var}\left(#1\right)}
+\newcommand{\cov}[1]{\operatorname{Cov}\left(#1\right)}
+%\newcommand{\cor}[1]{\operatorname{Cor}\left(#1\right)}
+\newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+\def\iid{\stackrel{\rm iid}{\sim}}
+\def\Bin{\text{Bin}}
+\def\Unif{\text{Unif}}
+\def\lsto{\stackrel{\rm sto}{\leq}}
+\def\gsto{\stackrel{\rm sto}{\geq}}
+
+\begin{document}
+% --------------------------------------------------------------
+% Start here
+% --------------------------------------------------------------
+\title{Homework 3}%replace X with the appropriate number
+\author{MATH 281A} %if necessary, replace with your course title
+\maketitle
+\begin{exercise}{6.3}
+\end{exercise}
+
+Carefully deal with the indicator functions and use the factorization theorem. This question provides common tools to deal with the situations when the parameter is directly associated with the support of the distribution. (E.g. uniform distribution on $[0,\theta]$)
+
+\begin{exercise}{6.4}
+\end{exercise}
+
+The same as 6.3.
+
+\begin{exercise}{6.5}
+\end{exercise}
+
+Actually, if you can prove $T_4$ sufficient, then the others are all sufficient.(Why?) For $T_4$, just use factorization theorem.
+
+\begin{exercise}{7.10}
+\end{exercise}
+
+The hint in the book provides essential tools you need. For (a) you just need a little bit of algebraic calculation since $F^{-1}$ exists. For (b), the inverse function actually maps platforms into jumps, and jumps into platforms.
+
+\begin{exercise}{Extra}
+\end{exercise}
+
+1.Question associated with $X | X_{(1)} , X_{(n)}$, when $X_i$ are iid uniformly distributed. 
+
+It suffices to show that $X | X_{(1)} , X_{(n)}$ is iid distributed with a mixed distribution by (a) a two-point distribution(what are they?) and (b) a restricted uniform distribution. To show what the restricted distribution is, using the following formula:
+$$
+\P(X\leq t | X_{(1)} \leq X \leq X_{(n)}) = \frac{\P(X\leq t , X_{(1)} \leq X \leq X_{(n)})}{\P(X_{(1)} \leq X \leq X_{(n)})}
+$$
+And of course you may assume that $ X_{(1)} \leq t \leq X_{(n)} $.
+
+2.Prove $0.5( X_{(1)} + X_{(n)})$ is always an unbiased estimator for the mean if distribution is symmetric.
+
+First you may assume the mean is zero without loss of generality.(Why?) Then you can use a fact that $-X$ and $X$ have the same distribution. Assume $\E 0.5( X_{(1)} + X_{(n)}) =c$, and construct a statistic whose expectation equals $-c$(for negativity) and $c$(for identical distribution property).
+
+3. Generalized mean $\rightarrow$ geometric mean: it suffices to show (why?)
+$$
+\frac{\ln (\E X^\lambda)}{\lambda} \rightarrow \E (\ln X)
+$$
+Here we assume that $X$ behaves well so that you can freely exchange the limits by Fubini's theorem. When you get stuck, try L'Hopital's rule.
+% --------------------------------------------------------------
+% You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+\end{document} 

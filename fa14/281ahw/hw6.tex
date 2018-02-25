@@ -1,0 +1,126 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newcommand{\E}{\operatorname{\mathbb{E}}}
+\renewcommand{\P}{\operatorname{\mathbb{P}}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Cor}{\operatorname{Cor}}
+\newcommand{\expect}[1]{\mathbb{E}\left(#1\right)}
+\newcommand{\pr}[1]{\mathbb{P}\left(#1\right)}
+\newcommand{\var}[1]{\operatorname{Var}\left(#1\right)}
+\newcommand{\cov}[1]{\operatorname{Cov}\left(#1\right)}
+%\newcommand{\cor}[1]{\operatorname{Cor}\left(#1\right)}
+\newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+\def\iid{\stackrel{\rm iid}{\sim}}
+\def\Bin{\text{Bin}}
+\def\Unif{\text{Unif}}
+\def\lsto{\stackrel{\rm sto}{\leq}}
+\def\gsto{\stackrel{\rm sto}{\geq}}
+
+\begin{document}
+% --------------------------------------------------------------
+% Start here
+% --------------------------------------------------------------
+\title{Homework 6}%replace X with the appropriate number
+\author{MATH 281A} %if necessary, replace with your course title
+\maketitle
+\begin{exercise}{3.18}
+\end{exercise}
+
+We use Method I to derive the contradiction. Pay special attention to the constant coefficient in both side of the polynomials. 
+
+\begin{exercise}{3.19}
+\end{exercise}
+
+This is a tricky one. Pay attention that the summation of the two truncated Poisson variables is NOT a truncated Poisson with parameter as the summation of the two parameters.
+
+To attack the problem, go through these steps. We set $n=1$. First calculate the mean of the truncated Poisson. One easy way to do this is using
+$$
+\theta = (1 - \P (\tilde{X} = 0) ) \E (X)
+$$
+where $X$ follows truncated Poisson and $\tilde{X}$ follows Poisson with the same distribution $\theta$. (Why we have this equation? Try to derive it.)
+
+You may find that this equation does not really solve the question since $\E(X)$ is not a linear function of $\theta$. One more ingredient is to consider $\P(X = 1)$ by using the following
+$$
+\P(X = 1) = \frac{\P(\tilde{X} = 1)}{1 - \P(\tilde{X} = 0)}
+$$
+where the setting is the same as before. 
+
+Finally try to construct $\theta$ using $\E(X)$ and $\P(X =1)$. What is the statistic finally?
+
+For $n =2$, by a simple exponential family observation we can find sufficient and complete statistic as $X_1 + X_2$. Then suppose the UMVUE in part (a) is $T(X_1)$, we just need
+$$
+\E (T(X_1) | X_1 +X_2)
+$$
+
+You will encounter several problems when doing this Rao-Blackwellization stuff. If you get stuck, try augmenting the variable into full Poisson, then get the result and deduct the case when zero happens.
+
+Good luck...
+
+\begin{exercise}{20(C)}
+\end{exercise}
+
+Direct calculation may yield the desired result. You only need to verify the C-R bound.
+
+\begin{exercise}{2.1}
+\end{exercise}
+
+Follow the hint and you will be OK. Notice that $\sigma^2$ is a constant.
+
+\begin{exercise}{2.5}
+\end{exercise}
+
+Use the standard move to show that the statistic is unbiased and based on the sufficient and complete statistic.
+
+\begin{exercise}{2.9}
+\end{exercise}
+
+All you need to do is to show $X$ sufficient and complete...
+
+\begin{exercise}{2.15}
+\end{exercise}
+
+We may have done this question before.
+
+\begin{exercise}{2.25}
+\end{exercise}
+
+This one is also not easy. First exhibit that $(X_{(n)}, Y_{(n)})$ is complete and sufficient (Easy). And intuitively we may look at statistic $X_{(n)} / Y_{(n)}$. To calculate the expectation of the statistic, the following lemma may be helpful.
+
+For some nonnegative continuous random variable $X$, we have
+$$
+\E(X) = \int_0^\infty \P(X > t) dt
+$$
+
+\begin{exercise}{2.27}
+\end{exercise}
+
+Once we have (a), then (b) is obvious since $MSE = bias^2 + Variance$ and the variance of MLE is clearly smaller  by the hint.
+
+For (a), note that $\xi = u$ is equivalent to the fact that $p = \Phi(\xi - u) = 0.5$. Then we need to show that $\E \Phi (u - \bar{X}) = 0.5$. In fact you just need to show that $\Phi (u - \bar{X})$ follows uniform distribution on $(0,1)$. 
+
+% --------------------------------------------------------------
+% You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+\end{document} 

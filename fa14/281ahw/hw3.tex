@@ -1,0 +1,131 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newcommand{\E}{\operatorname{\mathbb{E}}}
+\renewcommand{\P}{\operatorname{\mathbb{P}}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Cor}{\operatorname{Cor}}
+\newcommand{\expect}[1]{\mathbb{E}\left(#1\right)}
+\newcommand{\pr}[1]{\mathbb{P}\left(#1\right)}
+\newcommand{\var}[1]{\operatorname{Var}\left(#1\right)}
+\newcommand{\cov}[1]{\operatorname{Cov}\left(#1\right)}
+%\newcommand{\cor}[1]{\operatorname{Cor}\left(#1\right)}
+\newcommand\indep{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+
+\def\iid{\stackrel{\rm iid}{\sim}}
+\def\Bin{\text{Bin}}
+\def\Unif{\text{Unif}}
+\def\lsto{\stackrel{\rm sto}{\leq}}
+\def\gsto{\stackrel{\rm sto}{\geq}}
+
+\begin{document}
+% --------------------------------------------------------------
+% Start here
+% --------------------------------------------------------------
+\title{Homework 3}%replace X with the appropriate number
+\author{MATH 281A} %if necessary, replace with your course title
+\maketitle
+\begin{exercise}{2.15}
+\end{exercise}
+
+This question can be dealt with by brute force. Simply expand everything and you can get what you need.
+
+\begin{exercise}{5.4}
+\end{exercise}
+
+Feel free to use the equation you are going to prove in the following question:
+
+$$
+I(\theta) = \E (\frac{\partial \log f_\theta}{\partial \theta})^2 = - \E (\frac{\partial \log f_\theta^2}{\partial^2 \theta})
+$$
+
+\begin{exercise}{5.5}
+\end{exercise}
+
+Use the definitions.
+
+\begin{exercise}{5.14}
+\end{exercise}
+
+Revisit the basic integration properties such like substitutions. Simple substitution will yield the desired result.
+
+\begin{exercise}{5.16}
+\end{exercise}
+
+(C). First simplify the problem using ex 5.14. The target can be simplified to that 
+$$
+\int \frac{(f'(x))^2}{f(x)} dx = 0.5
+$$
+(Why? Give your reasons)
+
+Then it is just integrations. Refer to proper tools and formula if needed.
+
+\begin{exercise}{Extra}
+\end{exercise}
+
+1. For the information for alternative expressions of Poisson distribution, just follow the standard way, and pay attention to the expression for the expectations of $X$ under different parameterizations. 
+
+2. For proving
+$$
+I(\theta) = \E (\frac{\partial \log f_\theta}{\partial \theta})^2 = - \E (\frac{\partial \log f_\theta^2}{\partial^2 \theta})
+$$
+just use
+$$
+\E (g(X)) = \int g(x) f(x) dx
+$$
+
+Remember that this expression requires extra regulations, however the extra regulations are considerably mild so you can do this for most of the distributions. And this is an effective way of getting Fisher Information.
+
+3. This is tricky. Use the result of (2) to find the Fisher information. Trying to express $p$ in $g$ will result in super messy expressions. So try doing the fisher information by using $p$, while express $p'(g)$ into a function of $p$.
+
+Showing that the statistic cannot reach C-R bound is tricky as well. First, recognize that $X$ is sufficient and complete, so unbiased estimator (need to show that it is unbiased) based on $X$ is UMVU. Then, if you notice that any $X$ following binomial distribution can be represented as a sum of iid Bernoulli trials, say
+$$
+X = \sum_i Y_i
+$$
+where $Y_i$ is Bernoulli with parameter $p$. Then try to show that the statistic is actually the sample variance for $Y_i$. For the variance of sample variance, your result in week 1 will be useful.
+
+Note: you don't have to accurately show how they are difference from each other. Just argue that they are not equal. 
+
+4. $I(\theta)$ for a scaled family: it is all calculus work. Work on this equation:
+$$
+\int \frac{((f_\theta(y))')^2}{f_\theta(y)} dy
+$$
+with equation
+$$
+f_\theta(y) = \frac{1}{\theta} f(\frac{y}{\theta})
+$$
+And, be careful.
+
+5. $\E|X/Y| = \infty$ when $\P(X = 0) <1 $ and $Y$ has positive density at $0$: First condition tells you that $E|X|> 0$. So the target degenerates to prove $\E(1/Y) = \infty$. 
+
+Think over some questions:
+
+What's the definition of "density is positive at zero and left/right continuous" in analysis?
+
+What's the statistical meaning of that?
+
+If you have an interesting interval (possibly by answering these two questions), try getting the expectation of $1/Y$ on the interval?
+% --------------------------------------------------------------
+% You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+\end{document} 
