@@ -2,13 +2,33 @@
 = Research
 
 
-I am interested in a wide range of topics in statistics. Currently I am working on these topics:
+
+I am interested in a wide range of topics in statistics. I used to work on these topics:
 - Detection and localization of anomalies;
 - Clustering algorithms analysis and design; 
 - Robust and nonparametric methods, such as rankings;
 
-And many more interesting problems in theory and applications.
+During my work in industry, I am focusing on:
+- Computational ads;
+- Anomaly detection with robustness and accuracy; 
+- Scientific AB testing and algorithm evaluation;
+
+
+
+I review for venues such as [https://www.aistats.org AISTATS], [https://icml.cc ICML] and [https://nips.cc NeurIPS].
+
+
 
 Publications:
 : {[http://arxiv.org/abs/1604.07449 Distribution-free Detection of a Submatrix]}
-	[http://www.math.ucsd.edu/~eariasca/ E. Arias-Castro], Y. Liu, Journal of Multivariate Analysis, accepted. 2017.
+	[http://www.math.ucsd.edu/~eariasca/ E. Arias-Castro], Y. Liu, Journal of Multivariate Analysis, 2017. 
+
+	:{[https://arxiv.org/abs/1804.10887 Distribution-Free, Size Adaptive Submatrix Detection with Acceleration]}   Y.Liu and J.Guo, ALEA, Latin American
+Journal of Probability and Mathematical Statistics, 2020.
+
+:{[http://www.merl.com/publications/docs/TR2018-044.pdf Finding Multidimensional Patterns in Multidimensional
+Time Series]}   E.Laftchiev and Y.Liu, SIGKDD Workshop on Mining and Learning From Time Series, 2018. 
+
+:{[https://arxiv.org/pdf/1906.08884.pdf A Multiscale Scan Statistic for Adaptive Submatrix Localization
+]}   Y.Liu and [http://www.math.ucsd.edu/~eariasca/ E. Arias-Castro], ACM SIGKDD Research Track Paper, 2019. 
+
